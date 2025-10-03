@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TETRIS NEON</title>
+    <link rel="icon" type="image/svg+xml" href="assests/images/tetris-icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assests/css/style.css">
+</head>
+<body>
+    <!-- Container degli arcade games in background -->
+    <div class="arcade-background"></div>
+    
+    <div class="container">
+        <!-- Header con titolo in stile neon -->
+        <header>
+            <h1 class="neon-text">TETRIS NEON</h1>
+        </header>
+
+        <!-- Contenitore del gioco e dei pannelli laterali -->
+        <div class="game-layout">
+            <!-- Area di gioco con canvas -->
+            <div class="game-area">
+                <canvas id="tetris-canvas" width="300" height="600"></canvas>
+                <div id="game-over" class="hidden">
+                    <h2>GAME<br>OVER</h2>
+                    <p>Punteggio finale: <span id="final-score">0</span></p>
+                    <button id="restart-button" class="neon-button">RIPROVA</button>
+                </div>
+            </div>
+
+            <!-- Pannello laterale con informazioni e controlli -->
+            <div class="side-panel">
+                <div class="info-box">
+                    <h3>PUNTEGGIO</h3>
+                    <p id="score">0</p>
+                </div>
+                <div class="info-box">
+                    <h3>LIVELLO</h3>
+                    <p id="level">1</p>
+                </div>
+                <div class="info-box">
+                    <h3>RIGHE</h3>
+                    <p id="lines">0</p>
+                </div>
+                <div class="info-box">
+                    <h3>RECORD</h3>
+                    <p id="high-score">0</p>
+                </div>
+                <div class="next-piece-container">
+                    <h3>PROSSIMO</h3>
+                    <canvas id="next-piece-canvas" width="120" height="120"></canvas>
+                </div>
+                <button id="start-button" class="neon-button">INIZIA</button>
+                <button id="pause-button" class="neon-button hidden">PAUSA</button>
+            </div>
+
+            <!-- Sezione istruzioni -->
+            <div class="controls-section">
+                <h2>CONTROLLI</h2>
+                <div class="controls-container">
+                    <div class="control">
+                        <div class="key">←</div>
+                        <span>Muovi a sinistra</span>
+                    </div>
+                    <div class="control">
+                        <div class="key">→</div>
+                        <span>Muovi a destra</span>
+                    </div>
+                    <div class="control">
+                        <div class="key">↑</div>
+                        <span>Ruota</span>
+                    </div>
+                    <div class="control">
+                        <div class="key">↓</div>
+                        <span>Accelera</span>
+                    </div>
+                    <div class="control">
+                        <div class="key">↵</div>
+                        <span>Drop istantaneo</span>
+                    </div>
+                </div>
+                <div class="rules">
+                    <h3>REGOLE</h3>
+                    <p>Completa le righe per guadagnare punti. Ogni 10 righe, il livello aumenta e i pezzi cadono più velocemente.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 TETRIS NEON</p>
+        </footer>
+    </div>
+
+    <script src="assests/js/script.js"></script>
+</body>
+</html>

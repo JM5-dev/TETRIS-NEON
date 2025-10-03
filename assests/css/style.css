@@ -1,0 +1,728 @@
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variabili CSS per i colori in stile neon */
+:root {
+    --bg-color: #050a30;
+    --bg-secondary: #0a0e2c;
+    --neon-cyan: #00ffff;
+    --neon-green: #39ff14;
+    --neon-magenta: #ff00ff;
+    --neon-yellow: #ffff00;
+    --neon-blue: #00f3ff;
+    --neon-red: #ff073a;
+    --neon-orange: #ff9e00;
+    --shadow-color: rgba(0, 255, 255, 0.7);
+    --text-color: #ffffff;
+}
+
+/* Stili del corpo della pagina */
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--bg-color);
+    background-image: 
+        /* Pixel colorati che cambiano colore */
+        radial-gradient(circle at 10% 10%, var(--neon-cyan) 3px, transparent 3px),
+        radial-gradient(circle at 30% 20%, var(--neon-magenta) 4px, transparent 4px),
+        radial-gradient(circle at 50% 30%, var(--neon-green) 3px, transparent 3px),
+        radial-gradient(circle at 70% 40%, var(--neon-yellow) 4px, transparent 4px),
+        radial-gradient(circle at 90% 50%, var(--neon-red) 3px, transparent 3px),
+        radial-gradient(circle at 20% 60%, var(--neon-blue) 4px, transparent 4px),
+        radial-gradient(circle at 40% 70%, var(--neon-orange) 3px, transparent 3px),
+        radial-gradient(circle at 60% 80%, var(--neon-cyan) 4px, transparent 4px),
+        radial-gradient(circle at 80% 90%, var(--neon-magenta) 3px, transparent 3px),
+        /* Layer aggiuntivo di pixel */
+        radial-gradient(circle at 15% 35%, var(--neon-yellow) 2px, transparent 2px),
+        radial-gradient(circle at 35% 55%, var(--neon-green) 3px, transparent 3px),
+        radial-gradient(circle at 55% 75%, var(--neon-red) 2px, transparent 2px),
+        radial-gradient(circle at 75% 15%, var(--neon-blue) 3px, transparent 3px),
+        radial-gradient(circle at 95% 35%, var(--neon-orange) 2px, transparent 2px),
+        radial-gradient(circle at 25% 95%, var(--neon-cyan) 3px, transparent 3px);
+    background-size: 
+        80px 80px, 90px 90px, 70px 70px, 100px 100px, 85px 85px,
+        95px 95px, 75px 75px, 110px 110px, 65px 65px,
+        60px 60px, 85px 85px, 70px 70px, 90px 90px, 55px 55px, 80px 80px;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: colorfulPixels 15s infinite linear;
+}
+
+/* Arcade Background */
+.arcade-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    /* Pixel colorati sparsi che cambiano colore */
+    background-image: 
+        radial-gradient(circle at 12% 25%, var(--neon-red) 2px, transparent 2px),
+        radial-gradient(circle at 88% 35%, var(--neon-green) 3px, transparent 3px),
+        radial-gradient(circle at 45% 15%, var(--neon-blue) 2px, transparent 2px),
+        radial-gradient(circle at 25% 85%, var(--neon-orange) 3px, transparent 3px),
+        radial-gradient(circle at 65% 65%, var(--neon-yellow) 2px, transparent 2px),
+        radial-gradient(circle at 85% 75%, var(--neon-magenta) 3px, transparent 3px),
+        radial-gradient(circle at 35% 45%, var(--neon-cyan) 2px, transparent 2px),
+        radial-gradient(circle at 75% 25%, var(--neon-red) 2px, transparent 2px),
+        radial-gradient(circle at 15% 65%, var(--neon-green) 3px, transparent 3px),
+        radial-gradient(circle at 95% 85%, var(--neon-blue) 2px, transparent 2px);
+    background-size: 
+        120px 120px, 140px 140px, 100px 100px, 160px 160px, 110px 110px,
+        130px 130px, 90px 90px, 150px 150px, 80px 80px, 170px 170px;
+    animation: sparklingPixels 12s infinite linear;
+}
+
+/* Arcade Machine - creiamo vari elementi che si muovono */
+.arcade-machine {
+    position: absolute;
+    width: 80px;
+    height: 120px;
+    background: linear-gradient(135deg, #333 0%, #111 100%);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    opacity: 0.2;
+}
+
+.arcade-machine::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 45px;
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.arcade-machine::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    width: 50px;
+    height: 20px;
+    background: #222;
+    border-radius: 10px;
+}
+
+/* Animazione per le macchine arcade */
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Animazioni per pixel colorati che cambiano */
+@keyframes colorfulPixels {
+    0% {
+        filter: hue-rotate(0deg) brightness(1) saturate(1);
+        background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+    }
+    25% {
+        filter: hue-rotate(90deg) brightness(1.2) saturate(1.5);
+        background-position: 20px 20px, 25px 15px, 15px 25px, 30px 10px, 10px 30px, 35px 5px, 5px 35px, 40px 0px, 0px 40px, 15px 15px, 25px 25px, 20px 30px, 30px 20px, 10px 35px, 35px 10px;
+    }
+    50% {
+        filter: hue-rotate(180deg) brightness(0.9) saturate(2);
+        background-position: 40px 40px, 50px 30px, 30px 50px, 60px 20px, 20px 60px, 70px 10px, 10px 70px, 80px 0px, 0px 80px, 30px 30px, 50px 50px, 40px 60px, 60px 40px, 20px 70px, 70px 20px;
+    }
+    75% {
+        filter: hue-rotate(270deg) brightness(1.1) saturate(1.2);
+        background-position: 60px 60px, 75px 45px, 45px 75px, 90px 30px, 30px 90px, 105px 15px, 15px 105px, 120px 0px, 0px 120px, 45px 45px, 75px 75px, 60px 90px, 90px 60px, 30px 105px, 105px 30px;
+    }
+    100% {
+        filter: hue-rotate(360deg) brightness(1) saturate(1);
+        background-position: 80px 80px, 100px 60px, 60px 100px, 120px 40px, 40px 120px, 140px 20px, 20px 140px, 160px 0px, 0px 160px, 60px 60px, 100px 100px, 80px 120px, 120px 80px, 40px 140px, 140px 40px;
+    }
+}
+
+@keyframes sparklingPixels {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+        background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+    }
+    20% {
+        filter: hue-rotate(72deg) brightness(1.3);
+        background-position: 24px 24px, 28px 21px, 20px 25px, 32px 16px, 22px 30px, 26px 13px, 18px 32px, 30px 10px, 16px 28px, 38px 17px;
+    }
+    40% {
+        filter: hue-rotate(144deg) brightness(0.8);
+        background-position: 48px 48px, 56px 42px, 40px 50px, 64px 32px, 44px 60px, 52px 26px, 36px 64px, 60px 20px, 32px 56px, 76px 34px;
+    }
+    60% {
+        filter: hue-rotate(216deg) brightness(1.2);
+        background-position: 72px 72px, 84px 63px, 60px 75px, 96px 48px, 66px 90px, 78px 39px, 54px 96px, 90px 30px, 48px 84px, 114px 51px;
+    }
+    80% {
+        filter: hue-rotate(288deg) brightness(1.1);
+        background-position: 96px 96px, 112px 84px, 80px 100px, 128px 64px, 88px 120px, 104px 52px, 72px 128px, 120px 40px, 64px 112px, 152px 68px;
+    }
+    100% {
+        filter: hue-rotate(360deg) brightness(1);
+        background-position: 120px 120px, 140px 105px, 100px 125px, 160px 80px, 110px 150px, 130px 65px, 90px 160px, 150px 50px, 80px 140px, 190px 85px;
+    }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Stili per l'header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.neon-text {
+    font-size: 2.5rem;
+    color: var(--neon-cyan);
+    text-shadow: 
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan);
+    animation: flicker 1.5s infinite alternate;
+    letter-spacing: 5px;
+}
+
+/* Layout del contenuto principale del gioco */
+.game-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: fit-content;
+    overflow: visible;
+}
+
+/* Stili per l'area di gioco principale */
+.game-area {
+    position: relative;
+    border: 3px solid var(--neon-magenta);
+    box-shadow: 
+        0 0 10px var(--shadow-color),
+        inset 0 0 10px var(--shadow-color);
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: 
+        /* Pattern pixellato sottile per l'area di gioco */
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 0, 255, 0.05) 0px,
+            rgba(255, 0, 255, 0.05) 1px,
+            transparent 1px,
+            transparent 10px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 255, 0.05) 0px,
+            rgba(255, 0, 255, 0.05) 1px,
+            transparent 1px,
+            transparent 10px
+        );
+    height: fit-content;
+    overflow: hidden; /* Per contenere i fuochi d'artificio */
+}
+
+#tetris-canvas {
+    display: block;
+}
+
+
+
+
+
+/* Classe per migliorare l'aspetto 3D dei blocchi */
+.block-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: appear 0.2s ease-out;
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+    height: fit-content;
+}
+
+.info-box {
+    background-color: var(--bg-secondary);
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            rgba(57, 255, 20, 0.03) 0px,
+            rgba(57, 255, 20, 0.03) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.info-box h3 {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    color: var(--neon-green);
+}
+
+.info-box p {
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
+
+.next-piece-container {
+    background-color: var(--bg-secondary);
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            rgba(0, 243, 255, 0.04) 0px,
+            rgba(0, 243, 255, 0.04) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 8px var(--neon-blue);
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.next-piece-container h3 {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    color: var(--neon-blue);
+}
+
+#next-piece-canvas {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--neon-blue);
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Stili per i pulsanti */
+.neon-button {
+    background-color: transparent;
+    border: 2px solid var(--neon-magenta);
+    color: var(--neon-magenta);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    text-align: center;
+    margin-top: 8px;
+}
+
+.neon-button:hover {
+    background-color: var(--neon-magenta);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--neon-magenta);
+}
+
+/* Stili per la sezione controlli */
+.controls-section {
+    background-color: var(--bg-secondary);
+    background-image: 
+        repeating-linear-gradient(
+            -45deg,
+            rgba(255, 255, 0, 0.04) 0px,
+            rgba(255, 255, 0, 0.04) 2px,
+            transparent 2px,
+            transparent 8px
+        );
+    border: 2px solid var(--neon-yellow);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 250px;
+    height: fit-content;
+}
+
+.controls-section h2 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--neon-yellow);
+    margin-bottom: 15px;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.key {
+    background-color: var(--bg-color);
+    border: 2px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    min-width: 40px;
+    text-align: center;
+    box-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.rules {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.rules h3 {
+    color: var(--neon-yellow);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.rules p {
+    font-size: 0.65rem;
+    line-height: 1.8;
+}
+
+/* Stili per il footer */
+footer {
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Game Over Screen */
+#game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#game-over h2 {
+    color: #ff00ff;
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px #ff00ff,
+        0 0 80px #ff00ff;
+    animation: pulse 1.5s infinite;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 4px;
+    font-weight: 900;
+    text-transform: uppercase;
+    filter: blur(0px);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#game-over p {
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    text-align: center;
+    text-shadow: 
+        0 0 5px var(--text-color),
+        0 0 10px var(--text-color);
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+#final-score {
+    color: var(--neon-cyan);
+    font-size: 1.5rem;
+    text-shadow: 
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan),
+        0 0 15px var(--neon-cyan);
+    font-weight: bold;
+}
+
+#game-over #restart-button {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Classe per particelle dissolve che non interferiscono con il layout */
+.dissolve-particle {
+    position: fixed !important;
+    pointer-events: none !important;
+    z-index: 15 !important;
+    border-radius: 50% !important;
+}
+
+/* Animazioni */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            0 0 40px #ff00ff,
+            0 0 60px #ff00ff,
+            0 0 80px #ff00ff;
+        filter: brightness(1);
+    }
+    50% {
+        text-shadow: 
+            0 0 15px #ff00ff,
+            0 0 30px #ff00ff,
+            0 0 60px #ff00ff,
+            0 0 90px #ff00ff,
+            0 0 120px #ff00ff,
+            0 0 150px #ff00ff;
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media Queries per Responsive Design */
+@media screen and (max-width: 1024px) {
+    .game-layout {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .controls-section {
+        flex-basis: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+    }
+    
+    .controls-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    body {
+        overflow-y: auto;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+    
+    .container {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .neon-text {
+        font-size: 1.8rem;
+    }
+
+    .game-layout {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .game-area, .side-panel, .controls-section {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .side-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .info-box {
+        width: calc(50% - 5px);
+        padding: 10px;
+    }
+    
+    .next-piece-container {
+        width: 100%;
+    }
+
+    .neon-button {
+        width: 100%;
+    }
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+
+
+
+
+.level-up-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-family: 'Press Start 2P', cursive;
+    color: #39ff14;
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #000;
+    animation: pulse 2s infinite;
+    z-index: 1000;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.3;
+}
+
+.score-reward {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em;
+    animation: float-up 1s forwards;
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+}
+
+@keyframes float-up {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-50px); opacity: 0; }
+}
+
+.high-score-tag {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2em;
+    color: gold;
+    text-shadow: 0 0 10px gold, 0 0 20px gold;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateX(-50%) scale(1); }
+    to { transform: translateX(-50%) scale(1.1); }
+}
+
+.blinking {
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
